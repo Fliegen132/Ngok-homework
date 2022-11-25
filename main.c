@@ -4,8 +4,8 @@
 
 int main(void)
 {
-int m[SIZE]=  {0};
-int sum =0;
+int m[SIZE] = { 0 };
+int sum = 0;
   
 for(int i = 0; i < SIZE; ++i)
 {
