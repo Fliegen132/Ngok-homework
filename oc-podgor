@@ -1,0 +1,45 @@
+using System;
+using OC_Podgorbunskiy;
+
+namespace ConsoleApplication1
+{
+    internal class Program
+    {
+        private static Calculations _calculations;
+
+        private static TimeSpan[] _startTimes;
+        private static TimeSpan _beginWorkingTime;
+        private static TimeSpan _endWorkingTime;
+        
+        private static int[] _durations;
+        private static int _consultationTime;
+
+        public static void Main(string[] args)
+        {
+            _calculations = new Calculations();
+            string[] x = _calculations.AvailablePeriod(InitializeStartTimes(), InitializeDurations(), InitializeBeginWorkigTime(),
+                InitializeEndWorkigTime(),InitializeConsultationTime());
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                Console.WriteLine(x[i]);
+            }
+        }
+
+        private static TimeSpan[] InitializeStartTimes() =>
+            _startTimes = new TimeSpan[5]
+            {
+                TimeSpan.FromHours(10),
+                TimeSpan.FromHours(11),
+                TimeSpan.FromHours(15),
+                TimeSpan.FromHours(15.5),
+                TimeSpan.FromHours(16.83)
+            };
+
+        private static int[] InitializeDurations() => _durations = new int[5] {60,30,10,10,40};
+
+        private static TimeSpan InitializeBeginWorkigTime() => _beginWorkingTime = TimeSpan.FromHours(8);
+        private static TimeSpan InitializeEndWorkigTime() => _beginWorkingTime = TimeSpan.FromHours(18);
+        private static int InitializeConsultationTime() => _consultationTime = 30;
+    }
+}
