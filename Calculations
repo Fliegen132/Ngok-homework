@@ -1,0 +1,37 @@
+using System;
+namespace OC_Podgorbunskiy
+{
+    public class Calculations
+    {
+        public string[] AvailablePeriod(TimeSpan[] startTimes, int[] durations, TimeSpan beginWorkingTime, TimeSpan endWorkingTime, int consultationTime)
+        {
+            string[] exitStr = new string[1];
+            
+            TimeSpan a = ConvertSpan(beginWorkingTime, consultationTime);
+            exitStr[0] = $"{beginWorkingTime:hh\\:mm}-{a :hh\\:mm}";
+            
+            TimeSpan currentTimeSpan = beginWorkingTime;
+            int i = 0;
+            while (endWorkingTime.TotalHours > currentTimeSpan.TotalHours)
+            {        
+                Array.Resize(ref exitStr, exitStr.Length + 1);
+
+                TimeSpan newTime = ConvertSpan(currentTimeSpan, consultationTime);
+                
+                exitStr[i] = $"{currentTimeSpan:hh\\:mm}";
+                currentTimeSpan = newTime;
+                exitStr[i] += $"-{currentTimeSpan:hh\\:mm}";
+                
+                i++;
+            }
+            
+            return exitStr;
+        }
+        
+        private TimeSpan ConvertSpan(TimeSpan timeSpan, int a)
+        {
+            TimeSpan b = TimeSpan.FromHours(timeSpan.TotalHours + (float)a / 60);
+            return b;
+        }
+    }
+}
